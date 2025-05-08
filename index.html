@@ -3,147 +3,323 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirect</title>
+    <title>Квазар - Редирект</title>
     <style>
-        /* Импорт шрифта */
-        @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;600&display=swap');
+        /* Import fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
-        /* Основные стили для тела */
+        /* Base styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Ubuntu', sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            text-align: center;
-            overflow: hidden;
+            min-height: 100vh;
+            background-color: #f5f7fa;
             transition: background-color 0.3s, color 0.3s;
-        }
-
-        /* Светлая тема */
-        body.light {
-            background-color: #F5F5F5;
             color: #333;
+            position: relative;
         }
 
-        /* Темная тема */
+        /* Theme styling */
         body.dark {
-            background-color: #2a2a3d;
-            color: #ddd;
+            background-color: #131822;
+            color: #f5f7fa;
         }
 
-        /* Фон с текстурой */
-        body::after {
-            content: '';
+        /* Background pattern */
+        .background-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(#3498db11 1px, transparent 1px),
+            radial-gradient(#3498db11 1px, transparent 1px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            z-index: -1;
+        }
+
+        body.dark .background-pattern {
+            background-image: radial-gradient(#3498db08 1px, transparent 1px),
+            radial-gradient(#3498db08 1px, transparent 1px);
+        }
+
+        /* Header */
+        .header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0;
-            background-image: url('https://i.ibb.co/HqRwCSL/Pattern-Copy-1.png');
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-            opacity: 0.2;
-            pointer-events: none;
-            z-index: 1;
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
         }
 
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 20px;
+            color: #3498db;
+        }
+
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 22px;
+        }
+
+        /* Main container */
         .container {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-            backdrop-filter: blur(10px);
-            max-width: 400px;
-            width: 90%;
             position: relative;
             z-index: 2;
+            width: 90%;
+            max-width: 480px;
+            padding: 40px 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        body.dark .container {
+            background: rgba(25, 33, 46, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Content styling */
+        .security-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            background: #3498db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 32px;
         }
 
         h1 {
-            font-size: 24px;
-            margin-bottom: 20px;
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+            font-weight: 600;
         }
 
-        p {
-            font-size: 14px;
-            margin-top: 20px;
-            color: #888;
+        body.dark h1 {
+            color: #ecf0f1;
         }
 
-        a.button {
+        .subtitle {
+            font-size: 16px;
+            margin-bottom: 30px;
+            color: #7f8c8d;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        body.dark .subtitle {
+            color: #bdc3c7;
+        }
+
+        /* Button styling */
+        .button {
             display: inline-block;
-            padding: 15px 30px;
-            font-size: 20px;
-            font-weight: bold;
+            padding: 14px 32px;
+            font-size: 16px;
+            font-weight: 600;
             border-radius: 50px;
             text-decoration: none;
             color: #ffffff;
-            background: linear-gradient(45deg, #ff416c, #ff4b2b, #1e90ff, #00c6ff, #0072ff);
-            background-size: 400% 400%;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: gradientAnimation 5s ease-in-out infinite;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+            margin-bottom: 25px;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
         }
 
-        a.button:hover {
+        .button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 7px 20px rgba(52, 152, 219, 0.5);
         }
 
-        @keyframes gradientAnimation {
-            0% {
-                background-position: 0% 50%;
+        .button:active {
+            transform: translateY(-1px);
+        }
+
+        .button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .button:hover::before {
+            left: 100%;
+        }
+
+        /* Trust indicators */
+        .trust-indicators {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 15px;
+        }
+
+        .trust-indicator {
+            display: flex;
+            align-items: center;
+            font-size: 13px;
+            color: #7f8c8d;
+        }
+
+        body.dark .trust-indicator {
+            color: #bdc3c7;
+        }
+
+        .trust-icon {
+            margin-right: 5px;
+            color: #27ae60;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #95a5a6;
+        }
+
+        body.dark .footer {
+            color: #7f8c8d;
+        }
+
+        /* Animated loading indicator */
+        .loading-indicator {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .loading-dot {
+            width: 8px;
+            height: 8px;
+            margin: 0 5px;
+            background-color: #3498db;
+            border-radius: 50%;
+            display: inline-block;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        .loading-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .loading-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(0.8);
+                opacity: 0.5;
             }
             50% {
-                background-position: 100% 50%;
-            }
-            100% {
-                background-position: 0% 50%;
+                transform: scale(1.2);
+                opacity: 1;
             }
         }
     </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const currentURL = window.location.href;
-            let redirectTo = decodeURIComponent(currentURL.split('redirect_to=')[1] || '');
-
-            if (redirectTo) {
-                window.location.href = redirectTo;
-            } else {
-                alert(isRussian ? 'Не указана ссылка для перенаправления.' : 'No redirect link specified.');
-            }
-
-            const language = navigator.language || navigator.userLanguage;
-            const isRussian = language.startsWith('ru');
-
-            const titleText = isRussian ? 'Продолжить' : 'Continue';
-            const buttonText = isRussian ? 'Нажми сюда, чтобы продолжить' : 'Click here to proceed';
-            const instructionsText = isRussian
-                ? 'Чтобы перейти далее, нажми на кнопку выше.'
-                : 'To continue, please click the button above.';
-
-            //document.getElementById('title').innerText = titleText;
-            document.getElementById('redirectLink').innerText = buttonText;
-            document.getElementById('redirectLink').href = redirectTo;
-            document.getElementById('instructions').innerText = instructionsText;
-
-            // Определяем тему
-            if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                document.body.classList.add('dark');
-            } else {
-                document.body.classList.add('light');
-            }
-        });
-    </script>
 </head>
 <body>
-<div class="container">
-    <!-- <h1 id="title">Continue</h1> -->
-    <a id="redirectLink" class="button" href="#" target="_blank">Click here to proceed</a>
-    <p id="instructions">To continue, please click the button above.</p>
+<div class="background-pattern"></div>
+
+<div class="header">
+    <div class="logo">
+        <span class="logo-icon">✨</span> Квазар
+    </div>
 </div>
+
+<div class="container">
+    <div class="security-icon">✈️</div>
+    <h1 id="title">App connection</h1>
+    <p class="subtitle" id="subtitle">Trying to connect the app to your subscription. If nothing happens, press the button</p>
+
+    <div class="loading-indicator">
+        <div class="loading-dot"></div>
+        <div class="loading-dot"></div>
+        <div class="loading-dot"></div>
+    </div>
+
+    <a id="redirectLink" class="button" href="#">Connect the app</a>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Set theme based on user preference
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.classList.add('dark');
+        } else {
+            document.body.classList.add('light');
+        }
+
+        // Get redirect URL from query parameter
+        const currentURL = window.location.href;
+        let redirectTo = '';
+        try {
+            redirectTo = decodeURIComponent(currentURL.split('redirect_to=')[1] || '').split('&')[0];
+        } catch (e) {
+            redirectTo = '';
+        }
+
+        // Set language based on browser settings
+        const language = navigator.language || navigator.userLanguage;
+        const isRussian = language.startsWith('ru');
+
+        // Update text based on language
+        const titleText = isRussian ? 'Подключение приложения' : 'App connection';
+        const subtitleText = isRussian
+            ? 'Пытаемся подключить приложение к твоей подписке. Если ничего не происходит, нажми кнопку'
+            : 'Trying to connect the app to your subscription. If nothing happens, press the button';
+        const buttonText = isRussian ? 'Подключить приложение' : 'Connect the app';
+
+        document.getElementById('title').innerText = titleText;
+        document.getElementById('subtitle').innerText = subtitleText;
+        document.getElementById('redirectLink').innerText = buttonText;
+
+        // Handle redirect
+        if (redirectTo && redirectTo !== 'undefined') {
+            document.getElementById('redirectLink').setAttribute('href', redirectTo);
+        } else {
+            document.getElementById('redirectLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                alert(isRussian
+                    ? 'Не указана ссылка для перенаправления'
+                    : 'No redirect link specified');
+            });
+        }
+    });
+</script>
 </body>
 </html>
